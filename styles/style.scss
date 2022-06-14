@@ -1,0 +1,122 @@
+body {
+    font-family: 'Poppins';
+}
+
+#login-left {
+    // display: none;
+    height: 100vh;
+    #left-content {
+        height: 100%;
+    }
+    #form-login {
+        max-width: 60%;
+    }
+    #sign-in-title {
+        color: #3AA9AB;
+        margin: 50px;
+    }
+    #sign-in-btn {
+        margin-top: 20px;
+        padding: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 40px;
+        background-color: #3AA9AB;
+    }
+}
+
+#login-right {
+    width: 40%;
+    height: 100vh;
+    background-color: #3AA9AB;
+    padding-top: 230px;
+    #btn-sign-up {
+        font-family: 'Product Sans';
+        margin-top: 40px;
+        padding: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 40px;
+        background-color: #3AA9AB;
+        border-width: 3px;
+        border-color: white;
+        &:hover {
+            background-color: #246768;
+            border-width: 0px;
+        }
+    }
+}
+
+#signup-left {
+    width: 40%;
+    height: 100vh;
+    background-color: #3AA9AB;
+    padding-top: 230px;
+    #btn-sign-in-left {
+        font-family: 'Product Sans';
+        margin-top: 40px;
+        padding: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 40px;
+        background-color: #3AA9AB;
+        border-width: 3px;
+        border-color: white;
+        &:hover {
+            background-color: #246768;
+            border-width: 0px;
+        }
+    }
+}
+
+#signup-right {
+    // display: none;
+    height: 100vh;
+    #left-content {
+        height: 100%;
+    }
+    #form-login {
+        max-width: 60%;
+    }
+    #sign-up-title {
+        color: #3AA9AB;
+        margin: 50px;
+    }
+    #sign-in-btn {
+        margin-top: 20px;
+        padding: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 40px;
+        background-color: #3AA9AB;
+    }
+}
+
+.navbar {
+    #logo {
+        margin-left: 60px;
+        max-height: 90px;
+    }
+}
+
+.dashboard {
+    height: 100vh;
+    #left-menu {
+        width: 20%;
+        height: 100%;
+        background-color: #3AA9AB;
+    }
+}
+
+#sidebar {
+    height: 100vh;
+}
+
+#sinopsis-column,
+#sinopsis-value {
+    word-wrap: break-word;
+    width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
