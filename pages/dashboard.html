@@ -34,6 +34,12 @@
                     </a>
 
                 </li>
+                <li class="mt-4">
+                    <a href="../index.html" class="btn btn-danger">
+                        Back to home
+                    </a>
+
+                </li>
             </ul>
         </div>
 
@@ -42,6 +48,87 @@
         </div>
     </div>
 
+    <!-- Modal Edit Genre-->
+    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-book-form" action="../controller/book.php?action=edit" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="book_id" name="book_id">
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Book Name</label>
+                            <input type="text" class="form-control" id="book-name" name="book-name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            <select class="form-select" id="genre-select" name="genre_id" aria-label="Default select example">
+                                
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Recently Book Image</label>
+                            <input type="hidden" class="form-control" id="recenly-book-image" name="recenly-book-image">
+                            <img id="book-img" src="" style="width: 300px;" alt="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">New Book Image</label>
+                            <input type="file" class="form-control" id="book-image" name="book-image">
+                            <input type="hidden" value="Upload Image" name="submit">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Writer</label>
+                            <input type="text" class="form-control" id="writer" name="writer">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Rating</label>
+                            <input type="text" class="form-control" id="rating" name="rating">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sinopsis" class="form-label">Sinopsis</label>
+                            <textarea class="form-control" id="sinopsis" name="sinopsis" rows="3"></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete Book-->
+    <div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>do you really want to remove <span id="book-name"></span> from the genre ?</p>
+                    <form id="delete-book-form" method="post">
+                        <input type="hidden" id="delete_genre_id" name="book_id">
+
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal Create Book-->
     <div class="modal fade" id="createBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -59,7 +146,7 @@
 
                         <div class="mb-3">
                             <label for="genre" class="form-label">Genre</label>
-                            <select class="form-select" id="genre-select" name="genre_id" aria-label="Default select example">
+                            <select class="form-select" id="genre-select-create" name="genre_id" aria-label="Default select example">
                                 
                             </select>
                         </div>
@@ -100,7 +187,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Genre</h5>
+                    <h5 class="modal-title">Delete Genre</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -184,8 +271,8 @@
                             '<th>' + num++ + '</th>' +
                             '<td>' + value.genre + '</td>' +
                             '<td>' +
-                            '<a href="#" id="btn-edit-genre" class="btn btn-primary me-2" title="button edit" data-bs-toggle="modal" data-bs-target="#editGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
-                            '<a href="#" id="btn-delete-genre" class="btn btn-danger" title="button delete" data-bs-toggle="modal" data-bs-target="#deleteGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-trash"></i></a>' +
+                            '<a href="#" id="btn-edit-genre" class="btn btn-primary p-1 me-2" title="button edit" data-bs-toggle="modal" data-bs-target="#editGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
+                            '<a href="#" id="btn-delete-genre" class="btn btn-danger p-1 " title="button delete" data-bs-toggle="modal" data-bs-target="#deleteGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-trash"></i></a>' +
                             '</td>' +
                             '</tr>'
                         );
@@ -205,22 +292,33 @@
                 });
                 return this;
             };
+            $.fn.genre_select_create = function() {
+                $.get('../controller/genre.php', function(response) {
+                    var num = 1;
+                    $.each(response, function(key, value) {
+                        $('#genre-select-create').append(
+                            '<option value="' + value.id + '">' + value.genre + '</option>'
+                        );
+                    });
+                });
+                return this;
+            };
 
             $.fn.call_books = function() {
-                $.get('../controller/book.php', function(response) {
+                $.get('../controller/book.php?action=dashboard', function(response) {
                     var num = 1;
                     $.each(response, function(key, value) {
                         $('#book-table').append(
                             '<tr>' +
                             '<th>' + num++ + '</th>' +
                             '<td>' + value.name + '</td>' +
-                            '<td><img src="' + value.image + '" alt="" srcset="" style="max-width:240px ;"></td>' +
+                            '<td><img src="' + value.image + '" alt="" srcset="" style="width:100px ;"></td>' +
                             '<td>' + value.writer + '</td>' +
                             '<td>' + value.rating + '<i class="fa-solid fa-star" style="color:#feca57;"></i></td>' +
                             '<td id="sinopsis-value">' + value.sinopsis + '</td>' +
                             '<td>' +
-                            '<a href="#" id="btn-edit-genre" class="btn btn-primary me-2" title="button edit" data-bs-toggle="modal" data-bs-target="#editGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
-                            '<a href="#" id="btn-delete-genre" class="btn btn-danger" title="button delete" data-bs-toggle="modal" data-bs-target="#deleteGenreModal" data-genre="' + value.genre + '" data-id="' + value.id + '"><i class="fa-solid fa-trash"></i></a>' +
+                            '<a href="#" id="btn-edit-book" class="btn btn-primary me-2" title="button edit" data-bs-toggle="modal" data-bs-target="#editBookModal" data-name="' + value.name + '" data-id="' + value.id + '" data-image="' + value.image + '" data-writer="' + value.writer + '" data-rating="' + value.rating + '" data-sinopsis="' + value.sinopsis + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
+                            '<a href="#" id="btn-delete-book" class="btn btn-danger" title="button delete" data-bs-toggle="modal" data-bs-target="#deleteBookModal" data-name="' + value.name + '" data-id="' + value.id + '"><i class="fa-solid fa-trash"></i></a>' +
                             '</td>' +
                             '</tr>'
                         );
@@ -231,6 +329,7 @@
         })(jQuery);
         $(document).ready(function() {
             $(this).genre_select();
+            $(this).genre_select_create();
 
             $('#book-link').click(function() {
                 $('#book-link').prop('class', 'nav-link active');
@@ -341,7 +440,45 @@
                 modal.find('#genre-name').html(genre);
             });
 
+            $('#book-table').on('click', '#btn-delete-book', function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
 
+                var modal = $('#deleteBookModal');
+                modal.find('#delete_genre_id').val(id);
+                modal.find('#book-name').html(name);
+            });
+
+            $('#book-table').on('click', '#btn-edit-book', function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var img = $(this).data('image');
+                var writer = $(this).data('writer');
+                var rating = $(this).data('rating');
+                var sinopsis = $(this).data('sinopsis');
+
+                var modal = $('#editBookModal');
+                modal.find('#book_id').val(id);
+                modal.find('#book-name').val(name);
+                modal.find('#writer').val(writer);
+                modal.find('#rating').val(rating);
+                modal.find('#sinopsis').val(sinopsis);
+                modal.find('#recenly-book-image').val(img);
+                modal.find('#book-img').prop('src', img);
+            });
+
+            $('#delete-book-form').submit(function(event) {
+                event.preventDefault();
+                var data = $(this).serialize();
+                console.log(data);
+                $.post('../controller/book.php?action=delete', data, function(response) {}).done(function() {
+                    alert("Data genre berhasil dihapus");
+                    $('#table-genre-content').empty();
+                    $(document).call_books();
+                }).fail(function() {
+                    alert("error");
+                });
+            });
 
         });
     </script>

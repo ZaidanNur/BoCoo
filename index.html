@@ -8,41 +8,239 @@
     <title>BoCoo</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        .book-card {
+            height: 100%;
+            width: 15rem;
+            background-color: #F3F3F3;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-light ">
+        <div>
             <a class="navbar-brand" href="#" title="logo">
                 <img id="logo" src="assets\images\BoCoo.png" alt="" srcset="">
             </a>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        </div>
+        <div class="ms-4">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" style="color:#3AA9AB;font-weight: 700;" aria-current="page" href="#">Library</a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-end w-100 me-5" id="navbarNavDropdown">
+            <a class="btn btn-primary" href="./pages/dashboard.html">Dashboard</a>
         </div>
     </nav>
+
+    <div class="content container-fluid">
+        <div class="d-flex mt-4 justify-content-center">
+            <div class="d-flex border border-1">
+                <input type="text" class="form-control" id="search" name="search" title="search">
+                <a class="btn btn-secondary" id="btn-search" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+            <div class="ms-3">
+                <form action="" method="post">
+                    <select class="form-select" id="sort-genre" name="genre" aria-label="Default select example">
+                        <option value="" >Genres</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="recomended">
+            <h4 class="mb-4 mt-5">Recomended</h4>
+            <div class="row recomended-book mb-4">
+            </div>
+        </div>
+        <div class="head-book-shelf mt-5 mt-5">
+            <div class="table-book mt-5">
+                <div class="d-flex">
+                    <div class="col-book-img">
+                        <!-- <h5>Cover</h5> -->
+                    </div>
+                    <div class="col-book-title">
+                        <h5>Title</h5>
+                    </div>
+                    <div class="col-book-rating">
+                        <h5>Rating</h5>
+                    </div>
+                    <div class="col-book-genre">
+                        <h5>Genres</h5>
+                    </div>
+                    <div class="col-book-action">
+                        <h5>Action</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="book-shelf mt-5 mt-5">
+
+        </div>
+
+        <div class="row head-book-shelf mt-5 mt-5">
+            <a class="btn btn-primary show-more">Show More</a>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        (function($) {
+            $.fn.genre_select = function() {
+                $.get('./controller/genre.php', function(response) {
+                    var num = 1;
+                    $.each(response, function(key, value) {
+                        $('#sort-genre').append(
+                            '<option value="' + value.genre + '">' + value.genre + '</option>'
+                        );
+                    });
+                });
+                return this;
+            };
+            $.fn.recomended_book = function() {
+                $.get('./controller/book.php?action=recomended', function(response) {
+                    $.each(response, function(key, value) {
+                        var image = value.image;
+                        var image = image.replace('../', './');
+
+                        $('.recomended-book').append(
+                            '<div class="col">' +
+                            '<div class="card book-card p-3 h-100">' +
+                            '<img src="' + image + '" class="card-img-top" alt="...">' +
+                            '<div class="mt-auto">' +
+                            '<p class="card-text">' + value.name + '</p>' +
+                            '<p class="book-name"><strong>' + value.writer + '</strong></p>' +
+                            '<p class="book-name"><strong>' + value.rating + '</strong>/5 <span id="star-icon"><i class="fa-solid fa-star"></i></span></p>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    });
+                });
+                return this;
+            };
+            $.fn.row_book = function(begin_val) {
+                var genre_val = $('select[name=genre] option').filter(':selected').val() == '' ? null : $('select[name=genre] option').filter(':selected').val();
+                console.log(genre_val);
+                $.get('./controller/book.php', {
+                    genre: genre_val,
+                    begin: begin_val
+                }, function(response) {
+                    console.log(response);
+                    $.each(response, function(key, value) {
+                        console.log(value);
+
+                        var image = value.image;
+                        var image = image.replace('../', './');
+
+                        $('.book-shelf').append(
+                            '<div class="d-flex align-items-center mt-3 book-row">' +
+                            '<div class="col-book-img">' +
+                            '<img src="' + image + '" class="row-book-img" alt="">' +
+                            '</div>' +
+                            '<div class="col-book-title">' +
+                            '<div>' +
+                            value.name +
+                            '</div>' +
+                            '<div>' +
+                            '<Strong>' +
+                            value.writer +
+                            '</Strong>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-book-rating">' +
+                            '<strong>' + value.rating + '</strong>/5 <span id="star-icon"><i class="fa-solid fa-star"></i></span>' +
+                            '</div>' +
+                            '<div class="col-book-genre">' +
+                            value.genre +
+                            '</div>' +
+                            '<div class="col-book-action">' +
+                            '<a class="btn btn-secondary" >Show Details</a>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    });
+                });
+                return this;
+            };
+            $.fn.search_row_book = function() {
+                var search_val = $(document).find('#search').val();
+                console.log(search_val);
+                $.get('./controller/book.php?action=search', {
+                    search: search_val
+                }, function(response) {
+                    console.log(response);
+                    $('.book-shelf').empty();
+                    $.each(response, function(key, value) {
+                        console.log(value);
+
+                        var image = value.image;
+                        var image = image.replace('../', './');
+
+                        $('.book-shelf').append(
+                            '<div class="d-flex align-items-center mt-3 book-row">' +
+                            '<div class="col-book-img">' +
+                            '<img src="' + image + '" class="row-book-img" alt="">' +
+                            '</div>' +
+                            '<div class="col-book-title">' +
+                            '<div>' +
+                            value.name +
+                            '</div>' +
+                            '<div>' +
+                            '<Strong>' +
+                            value.writer +
+                            '</Strong>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-book-rating">' +
+                            '<strong>' + value.rating + '</strong>/5 <span id="star-icon"><i class="fa-solid fa-star"></i></span>' +
+                            '</div>' +
+                            '<div class="col-book-genre">' +
+                            value.genre +
+                            '</div>' +
+                            '<div class="col-book-action">' +
+                            '<a class="btn btn-secondary" >Show Details</a>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    });
+                });
+                return this;
+            };
+
+
+        })(jQuery);
+        $(document).ready(function() {
+            var begin = 0;
+            $(this).genre_select();
+            $(this).recomended_book();
+            $(this).row_book();
+
+            $('#btn-search').click(function() {
+                $(this).search_row_book();
+            });
+
+            $('select[name=genre]').on('change', function() {
+                $('.book-shelf').empty();
+                $(this).row_book(0);
+            });
+
+            $('.show-more').click(function() {
+                begin += 3;
+                $(this).row_book(begin);
+            });
+
+
+
+        });
+    </script>
 </body>
 
 </html>
